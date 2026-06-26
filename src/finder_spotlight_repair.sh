@@ -80,7 +80,7 @@ verify() {
     echo "Host: $(hostname)"
     echo
     echo "Finder and metadata processes:"
-    ps -Ao pid,user,etime,comm,args | grep -Ei 'Finder|mds|mdworker|Spotlight|QuickLook' | grep -v grep || true
+    ps -Ao pid,user,etime,comm,args | awk 'NR == 1 || /Finder|mds|mdworker|Spotlight|QuickLook/' || true
     echo
     echo "Spotlight status:"
     /usr/bin/mdutil -as 2>&1 || true

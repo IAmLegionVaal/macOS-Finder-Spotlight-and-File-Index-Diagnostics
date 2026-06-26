@@ -23,7 +23,7 @@ section "Recent Finder and Spotlight events" /bin/bash -c "/usr/bin/log show --l
 
 VOLUME_COUNT=0
 INDEX_DISABLED=0
-while read -r filesystem size used available capacity mountpoint; do
+while read -r _filesystem size used available capacity mountpoint; do
   VOLUME_COUNT=$((VOLUME_COUNT+1))
   fstype=$(diskutil info "$mountpoint" 2>/dev/null | awk -F: '/File System Personality/{gsub(/^ +/,"",$2); print $2; exit}')
   index_state=$(mdutil -s "$mountpoint" 2>/dev/null | tail -n1 | sed 's/^[[:space:]]*//')
